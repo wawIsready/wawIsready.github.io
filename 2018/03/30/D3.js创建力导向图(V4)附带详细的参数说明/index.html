@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>D3.js创建力导向图(V4)附带详细的参数说明 | Eiwen的前端小站</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一.效果展示 二.代码示例1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495969798">
+<meta name="keywords" content="D3.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="D3.js创建力导向图(V4)附带详细的参数说明">
+<meta property="og:url" content="https://wawisready.github.io/2018/03/30/D3.js创建力导向图(V4)附带详细的参数说明/index.html">
+<meta property="og:site_name" content="Eiwen的前端小站">
+<meta property="og:description" content="一.效果展示 二.代码示例1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495969798">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20181102151835255.gif">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20181029173815955.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20181029173800377.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20181029174800689.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20181029174004828.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20181030092953652.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-03-30T13:04:47.562Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="D3.js创建力导向图(V4)附带详细的参数说明">
+<meta name="twitter:description" content="一.效果展示 二.代码示例1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495969798">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20181102151835255.gif">
+  
+    <link rel="alternate" href="/atom.xml" title="Eiwen的前端小站" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Eiwen的前端小站</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://wawisready.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-D3.js创建力导向图(V4)附带详细的参数说明" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/30/D3.js创建力导向图(V4)附带详细的参数说明/" class="article-date">
+  <time datetime="2018-03-30T12:51:14.000Z" itemprop="datePublished">2018-03-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      D3.js创建力导向图(V4)附带详细的参数说明
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一-效果展示"><a href="#一-效果展示" class="headerlink" title="一.效果展示"></a>一.效果展示</h2><p><img src="https://img-blog.csdnimg.cn/20181102151835255.gif" alt="在这里插入图片描述"></p>
+<h2 id="二-代码示例"><a href="#二-代码示例" class="headerlink" title="二.代码示例"></a>二.代码示例</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"zh-cn"</span>&gt;</span><br><span class="line"></span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span><br><span class="line">    &lt;meta http-equiv=<span class="string">"X-UA-Compatible"</span> content=<span class="string">"ie=edge"</span>&gt;</span><br><span class="line">    &lt;title&gt;D3 test&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"container"</span>&gt;</span><br><span class="line">        &lt;div id=<span class="string">"graph"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>body&gt;</span><br><span class="line"></span><br><span class="line">&lt;<span class="regexp">/html&gt;</span></span><br><span class="line"><span class="regexp">&lt;script src="/</span><span class="keyword">static</span>/js/d3-v4.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">&lt;script&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    var nodes = [ &#123; name: "</span>桂林<span class="string">" &#125;, &#123; name: "</span>广州<span class="string">" &#125;,</span></span><br><span class="line"><span class="string">              &#123; name: "</span>厦门<span class="string">" &#125;, &#123; name: "</span>杭州<span class="string">" &#125;,</span></span><br><span class="line"><span class="string">              &#123; name: "</span>上海<span class="string">" &#125;, &#123; name: "</span>青岛<span class="string">" &#125;,</span></span><br><span class="line"><span class="string">              &#123; name: "</span>天津<span class="string">" &#125; ];</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    var links = [ &#123; source : 0 , target: 1 &#125; , &#123; source : 0 , target: 2 &#125; ,</span></span><br><span class="line"><span class="string">               &#123; source : 0 , target: 3 &#125; , &#123; source : 1 , target: 4 &#125; ,</span></span><br><span class="line"><span class="string">               &#123; source : 1 , target: 5 &#125; , &#123; source : 1 , target: 6 &#125; ];</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    var width = 800;</span></span><br><span class="line"><span class="string">    var height = 600;</span></span><br><span class="line">    var svg = d3.select("#graph")</span><br><span class="line">        .append(<span class="string">"svg"</span>)</span><br><span class="line">        .attr(<span class="string">"width"</span>, width)</span><br><span class="line">        .attr(<span class="string">"height"</span>, height)</span><br><span class="line">        .call(d3.zoom() <span class="comment">//创建缩放行为</span></span><br><span class="line">            .scaleExtent([<span class="number">-5</span>, <span class="number">2</span>])</span><br><span class="line">            .on(<span class="string">'zoom'</span>,zoom_actions)); <span class="comment">//设置缩放范围</span></span><br><span class="line">        </span><br><span class="line">   </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//初始化力学仿真器，通过布局函数格式化数据    </span></span><br><span class="line">    <span class="keyword">var</span> simulation = d3.forceSimulation(nodes)</span><br><span class="line">        .force(<span class="string">"link"</span>, d3.forceLink(links).distance(<span class="number">100</span>))   <span class="comment">//distance设置连线距离</span></span><br><span class="line">        .force(<span class="string">"charge"</span>, d3.forceManyBody().strength(<span class="number">-100</span>))  <span class="comment">//注1&gt; </span></span><br><span class="line">        .force(<span class="string">"center"</span>, d3.forceCenter(width / <span class="number">2</span>, height / <span class="number">2</span>))  <span class="comment">//设置力学仿真器的中心</span></span><br><span class="line">        .on(<span class="string">"tick"</span>, ticked);  </span><br><span class="line">	</span><br><span class="line">	<span class="comment">//布局函数格式化后的数据，注2&gt;</span></span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'nodes'</span>, nodes);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'links'</span>, links);  </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> color = d3.scaleOrdinal(d3.schemeCategory20);  <span class="comment">//生成颜色选择器函数，此函数返回颜色数组 (string [])</span></span><br><span class="line">    </span><br><span class="line">     <span class="comment">//添加group包裹svg元素以进行缩放，目的是在缩放时不会影响整个容器的位置</span></span><br><span class="line">    <span class="keyword">var</span> g = svg.append(<span class="string">"g"</span>)</span><br><span class="line">    .attr(<span class="string">"class"</span>, <span class="string">"everything"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 绘制连线</span></span><br><span class="line">    <span class="keyword">var</span> svg_links = g.append(<span class="string">'g'</span>)</span><br><span class="line">        .selectAll(<span class="string">"line"</span>)</span><br><span class="line">        .data(links)</span><br><span class="line">        .enter()</span><br><span class="line">        .append(<span class="string">"line"</span>)</span><br><span class="line">        .style(<span class="string">"stroke"</span>, <span class="string">"#ccc"</span>)</span><br><span class="line">        .style(<span class="string">"stroke-width"</span>, <span class="number">3</span>)</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">    <span class="comment">// 绘制节点    </span></span><br><span class="line">    <span class="keyword">var</span> svg_nodes = g.append(<span class="string">'g'</span>)</span><br><span class="line">        .selectAll(<span class="string">"circle"</span>)</span><br><span class="line">        .data(nodes)</span><br><span class="line">        .enter()</span><br><span class="line">        .append(<span class="string">"circle"</span>)</span><br><span class="line">        .attr(<span class="string">"r"</span>, <span class="string">'20'</span>)</span><br><span class="line">        .style(<span class="string">"fill"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">d, i</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> color(i);</span><br><span class="line">        &#125;).call(d3.drag().on(<span class="string">"start"</span>, dragstarted) <span class="comment">//d3.drag() 创建一个拖曳行为</span></span><br><span class="line">          .on(<span class="string">"drag"</span>, dragged)</span><br><span class="line">          .on(<span class="string">"end"</span>, dragended));</span><br><span class="line">   </span><br><span class="line">    <span class="comment">//绘制描述节点的文字</span></span><br><span class="line">    <span class="keyword">var</span> svg_texts =  g.append(<span class="string">'g'</span>)</span><br><span class="line">        .selectAll(<span class="string">"text"</span>)</span><br><span class="line">        .data(nodes)</span><br><span class="line">        .enter()</span><br><span class="line">        .append(<span class="string">"text"</span>)</span><br><span class="line">        .style(<span class="string">"fill"</span>, <span class="string">"black"</span>)</span><br><span class="line">        .attr(<span class="string">"dx"</span>, <span class="number">20</span>)</span><br><span class="line">        .attr(<span class="string">"dy"</span>, <span class="number">8</span>)</span><br><span class="line">        .text(<span class="function"><span class="keyword">function</span> (<span class="params">d</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> d.name;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//监听拖拽开始    </span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">dragstarted</span>(<span class="params">d</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!d3.event.active) simulation.alphaTarget(<span class="number">0.3</span>).restart(); <span class="comment">//alpha是动画的冷却系数，运动过程中会不断减小，直到小于0.005为止，此时动画会停止。</span></span><br><span class="line">        d.fx = d.x;    <span class="comment">//fx为固定坐标，x为初始坐标  注3&gt;  </span></span><br><span class="line">        d.fy = d.y;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//监听拖拽中  </span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">dragged</span>(<span class="params">d</span>) </span>&#123;</span><br><span class="line">        d.fx = d3.event.x;  <span class="comment">//fevent.x为拖拽移动时的坐标</span></span><br><span class="line">        d.fy = d3.event.y;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//监听拖拽结束</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">dragended</span>(<span class="params">d</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!d3.event.active) simulation.alphaTarget(<span class="number">0</span>);</span><br><span class="line">        d.fx = <span class="literal">null</span>;        <span class="comment">//固定坐标清空</span></span><br><span class="line">        d.fy = <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">zoom_actions</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">        g.attr(<span class="string">"transform"</span>, d3.event.transform)</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//拖拽时的事件监听器  以实时更新坐标</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">ticked</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        svg_links.attr(<span class="string">"x1"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">d</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> d.source.x;</span><br><span class="line">            &#125;)</span><br><span class="line">            .attr(<span class="string">"y1"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">d</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> d.source.y;</span><br><span class="line">            &#125;)</span><br><span class="line">            .attr(<span class="string">"x2"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">d</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> d.target.x;</span><br><span class="line">            &#125;)</span><br><span class="line">            .attr(<span class="string">"y2"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">d</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> d.target.y;</span><br><span class="line">            &#125;);</span><br><span class="line"></span><br><span class="line">        svg_nodes.attr(<span class="string">"cx"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">d</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> d.x;</span><br><span class="line">            &#125;)</span><br><span class="line">            .attr(<span class="string">"cy"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">d</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> d.y;</span><br><span class="line">            &#125;);</span><br><span class="line"></span><br><span class="line">        svg_texts.attr(<span class="string">"x"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">d</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> d.x;</span><br><span class="line">            &#125;)</span><br><span class="line">            .attr(<span class="string">"y"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">d</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> d.y;</span><br><span class="line">            &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="三-注释详解"><a href="#三-注释详解" class="headerlink" title="三.注释详解"></a>三.注释详解</h2><hr>
+<p>相关函数的说明在代码的注释中已经写的很清楚了，下面我针对以上注释中的注1&gt;,2&gt;,3&gt;做一些详细的解释。</p>
+<blockquote>
+<p><strong>1&gt;  forceManyBody()函数为创建多体力函数，strength为相互作用力，正的为吸力，负的为斥力，何为多体力？你可以把它理解成是一个创建作用力,设置作用力阈值和计算作用力大小的高阶函数</strong></p>
+</blockquote>
+<p>这是github上D3.js对于<code>forceManyBody()</code>的解释。</p>
+<p><img src="https://img-blog.csdnimg.cn/20181029173815955.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<hr>
+<p>简单来说，就是此函数可以创建一个带参的多体力对象，此对象中有一些函数，咱们可以调用，具体有如下几个函数：</p>
+<p><img src="https://img-blog.csdnimg.cn/20181029173800377.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><code>strength</code>,<code>distanceMin</code>和<code>distanceMax</code>都是字面意思，无需多说，我稍微解释下<code>theta</code>函数。</p>
+<hr>
+<p>我先放上github官网上对于此<code>manyBody.theta()</code>函数的解释。<br><img src="https://img-blog.csdnimg.cn/20181029174800689.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>什么意思呢?简单来说，就是这个函数用来计算你每个节点所受到的其他所有节点的合力的近似值，而<code>theta</code>函数就是用来设置此近似值的精度，官方给了一个默认值是0.9。</p>
+<p>我们可以看到，这个函数依赖的是<code>Barnes-Hut</code>算法，那么何为<code>Barnes-Hut</code>?</p>
+<blockquote>
+<p>Barnes-Hut算法是一种用于实现N体问题（n-body）模拟的近似算法。</p>
+</blockquote>
+<p><strong>以下是维基百科的解释</strong>：<br><img src="https://img-blog.csdnimg.cn/20181029174004828.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>上面那一堆东西就是说，这个算法是从节点的根数据开始递归，并遵循一定的原则，最终计算出合力。具体规则如下：</p>
+<blockquote>
+<p><strong>1.如果当前节点是一个外部节点（而且它不是物体bb），计算当前节点施加在物体bb上的力，并将其加到bb的合力上。<br>2.计算商s/ds/d的值。如果s/d&lt;θs/d&lt;θ，将这个内部节点看成一个单独的物体<br>3.计算其施加在物体bb上的力，并将其加到bb的合力上。否则，在当前节点的每个孩子节点上递归地执行上述步骤。</strong></p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>2&gt;,3&gt;原始数据被布局函数转化后使什么格式呢？我们可以看下打印后的结果。</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20181030092953652.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>以上参数什么含义呢？</p>
+<blockquote>
+<p><strong>index - 节点的索引号<br>vx, vy - 节点上一个时刻的坐标<br>x, y - 节点的当前坐标</strong></p>
+</blockquote>
+<p>拖拽函数中的<code>fx</code>，就对应着节点中的<code>x</code>,是节点的初始横坐标；<code>fy</code>就对应着节点中的<code>y</code>，是节点的初始纵坐标。</p>
+<h2 id="四-参考文章"><a href="#四-参考文章" class="headerlink" title="四.参考文章"></a>四.参考文章</h2><hr>
+<p> 【1】<a href="https://github.com/d3/d3-force#forceManyBody" target="_blank" rel="noopener">D3.js GitHub</a><br>【2】<a href="https://github.com/tianxuzhang/d3.v4-API-Translation" target="_blank" rel="noopener">D3.js 4.x API中文手册</a><br>【3】<a href="https://blog.csdn.net/baimafujinji/article/details/53036473" target="_blank" rel="noopener">Barnes-Hut算法（quad-tree的一个应用）</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://wawisready.github.io/2018/03/30/D3.js创建力导向图(V4)附带详细的参数说明/" data-id="cjtvics95000luovds376ke3a" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/D3-js/">D3.js</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/04/02/JavaScript 数组去重的7种实现/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          JavaScript 数组去重的7种实现
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/17/D3.js实现带动画效果的柱状图/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">D3.js 实现带动画效果的柱状图</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/D3-js/">D3.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Echarts/">Echarts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端自动化/">前端自动化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/框架/">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试题/">面试题</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/D3-js/" style="font-size: 16.67px;">D3.js</a> <a href="/tags/Echarts/" style="font-size: 10px;">Echarts</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/前端自动化/" style="font-size: 13.33px;">前端自动化</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/面试题/" style="font-size: 10px;">面试题</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/03/30/从-Promise-来看-JavaScript-的异步处理/">从 Promise 来看 JavaScript 的异步处理</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/26/UI recorder 自动化UI测试框架使用手册/">UI recorder 自动化UI测试框架使用手册</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/20/原生JS实现并封装前端路由/">原生 JavaScript 实现并封装前端路由</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/19/Karma 自动化测试框架搭建文档/">Karma 自动化测试框架搭建文档</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/06/JavaScript事件委托机制与this的比较/">JavaScript事件委托机制与this的比较</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Eiwen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

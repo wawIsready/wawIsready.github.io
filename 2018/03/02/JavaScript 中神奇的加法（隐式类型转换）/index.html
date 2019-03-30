@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>JavaScript 中神奇的加法（隐式类型转换） | Eiwen的前端小站</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一般来说， 加减法应该是我们学习生涯中接触到的第一个运算符，通常意义下它也是最简单的运算符。 在程序语言中，加减法的情况一般也比较简单，但是在 JavaScript 中加法的情况却比较奇怪，因为它有着大量特殊的情况。 我们举个简单的例子：1231 + &apos;1&apos; = &apos;11&apos;; 1 + &apos;a&apos; = &apos;1a&apos;;1 + []  = &apos;&apos;; 从基础数据类型的加法开始，我们得到的结果就变的奇怪了起来。究其根由">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript 中神奇的加法（隐式类型转换）">
+<meta property="og:url" content="https://wawisready.github.io/2018/03/02/JavaScript 中神奇的加法（隐式类型转换）/index.html">
+<meta property="og:site_name" content="Eiwen的前端小站">
+<meta property="og:description" content="一般来说， 加减法应该是我们学习生涯中接触到的第一个运算符，通常意义下它也是最简单的运算符。 在程序语言中，加减法的情况一般也比较简单，但是在 JavaScript 中加法的情况却比较奇怪，因为它有着大量特殊的情况。 我们举个简单的例子：1231 + &apos;1&apos; = &apos;11&apos;; 1 + &apos;a&apos; = &apos;1a&apos;;1 + []  = &apos;&apos;; 从基础数据类型的加法开始，我们得到的结果就变的奇怪了起来。究其根由">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190118094233741.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190118094301683.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190118094438440.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190118094456545.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190118094506945.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-03-30T13:10:17.727Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript 中神奇的加法（隐式类型转换）">
+<meta name="twitter:description" content="一般来说， 加减法应该是我们学习生涯中接触到的第一个运算符，通常意义下它也是最简单的运算符。 在程序语言中，加减法的情况一般也比较简单，但是在 JavaScript 中加法的情况却比较奇怪，因为它有着大量特殊的情况。 我们举个简单的例子：1231 + &apos;1&apos; = &apos;11&apos;; 1 + &apos;a&apos; = &apos;1a&apos;;1 + []  = &apos;&apos;; 从基础数据类型的加法开始，我们得到的结果就变的奇怪了起来。究其根由">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190118094233741.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70">
+  
+    <link rel="alternate" href="/atom.xml" title="Eiwen的前端小站" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Eiwen的前端小站</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://wawisready.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-JavaScript 中神奇的加法（隐式类型转换）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/02/JavaScript 中神奇的加法（隐式类型转换）/" class="article-date">
+  <time datetime="2018-03-02T01:12:20.000Z" itemprop="datePublished">2018-03-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JavaScript 中神奇的加法（隐式类型转换）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>一般来说， 加减法应该是我们学习生涯中接触到的第一个运算符，通常意义下它也是最简单的运算符。</p>
+<p>在程序语言中，加减法的情况一般也比较简单，但是在 JavaScript 中加法的情况却比较奇怪，因为它有着大量特殊的情况。</p>
+<p>我们举个简单的例子：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> + <span class="string">'1'</span> = <span class="string">'11'</span>; </span><br><span class="line"><span class="number">1</span> + <span class="string">'a'</span> = <span class="string">'1a'</span>;</span><br><span class="line"><span class="number">1</span> + []  = <span class="string">''</span>;</span><br></pre></td></tr></table></figure></p>
+<p>从基础数据类型的加法开始，我们得到的结果就变的奇怪了起来。究其根由，其实是 JavaScript 的隐式转换在做怪。</p>
+<h2 id="一-什么是-JavaScript-隐式转换"><a href="#一-什么是-JavaScript-隐式转换" class="headerlink" title="一.什么是 JavaScript 隐式转换?"></a>一.什么是 JavaScript 隐式转换?</h2><p>在讲隐式转换之前，咱们先得回顾一下 <strong>JavaScript</strong> 的 <strong>5</strong> 种基础数据类型,<strong>3</strong>种引用数据类型和 <strong>3</strong> 个特殊值：</p>
+<p><strong>基础数据类型：</strong></p>
+<ol>
+<li>number 类型</li>
+<li>string 类型</li>
+<li>boolean 类型</li>
+<li>null 类型</li>
+<li>undefined 类型</li>
+</ol>
+<p><strong>引用数据类型：</strong></p>
+<ol>
+<li>object</li>
+<li>function</li>
+<li>array</li>
+</ol>
+<p><strong>特殊值:</strong></p>
+<ol>
+<li>NaN</li>
+<li>+Infinity 和 -Infinity</li>
+<li>+0 和 -0</li>
+</ol>
+<p>ok，我们回到隐式转换中，正如我开始举的那个例子一样，<strong>JavaScript</strong> 的隐式转换总是发生在各种运算符以及特殊的真值判断中(比如说 if),对与 <strong>java</strong> 来说，一个 <strong>Number</strong> 类型值 <strong>+</strong> 一个 <strong>Boolean</strong> 类型值 是肯定会报错的，但是在 <strong>JavaScript 中却不会</strong>，因为隐式转换会将 <strong>Boolean</strong>     类型的值转换为 <strong>Number</strong> 值。</p>
+<h2 id="二-JavaScript-的加法中隐式转换是怎么工作的？"><a href="#二-JavaScript-的加法中隐式转换是怎么工作的？" class="headerlink" title="二. JavaScript 的加法中隐式转换是怎么工作的？"></a>二. JavaScript 的加法中隐式转换是怎么工作的？</h2><p>你在百度上搜索 JavaScript 加法特性，你也许会看到这种图解：<br><img src="https://img-blog.csdnimg.cn/20190118094233741.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>或者是这种：<br><img src="https://img-blog.csdnimg.cn/20190118094301683.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>他们是很有用处的内容总结，但是光靠它们并不能帮我们更好的去理解，所以我们需要实例来支撑理论。</p>
+<p>我们先来看看一个有趣的例子：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// number + ?</span></span><br><span class="line"><span class="number">1</span> + <span class="number">1</span> = <span class="number">2</span>;  <span class="comment">// number</span></span><br><span class="line"><span class="number">1</span> + <span class="string">'1'</span> = <span class="string">"11"</span>;  <span class="comment">// string</span></span><br><span class="line"><span class="number">1</span> + <span class="literal">true</span> = <span class="number">2</span>; <span class="comment">// number</span></span><br><span class="line"><span class="number">1</span> + <span class="literal">null</span> =  <span class="number">1</span>; <span class="comment">//number</span></span><br><span class="line"><span class="number">1</span> + <span class="literal">undefined</span> = <span class="literal">NaN</span>  <span class="comment">// NaN</span></span><br><span class="line"><span class="number">1</span> + &#123;&#125; = <span class="string">"1[object Object]"</span>  <span class="comment">// string</span></span><br><span class="line"><span class="number">1</span> + [] = <span class="string">"1"</span>;  <span class="comment">// string </span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// string + ?</span></span><br><span class="line"><span class="string">'1'</span> + <span class="number">1</span> = <span class="string">"11"</span>;  <span class="comment">// string</span></span><br><span class="line"><span class="string">'1'</span> + <span class="string">'1'</span> = <span class="string">"11"</span>;   <span class="comment">// string</span></span><br><span class="line"><span class="string">'1'</span> + <span class="literal">true</span> = <span class="string">"1true"</span>;   <span class="comment">// string</span></span><br><span class="line"><span class="string">'1'</span> + <span class="literal">null</span> = <span class="string">"1null"</span>;   <span class="comment">// string</span></span><br><span class="line"><span class="string">'1'</span> + <span class="literal">undefined</span> = <span class="string">"1undefined"</span>;   <span class="comment">// string</span></span><br><span class="line"><span class="string">'1'</span> + &#123;&#125; = <span class="string">"1[object object]"</span>;   <span class="comment">// string</span></span><br><span class="line"><span class="string">'1'</span> + [] = <span class="string">"1"</span>;  <span class="comment">// string</span></span><br></pre></td></tr></table></figure></p>
+<p>看到这大家是不是有点晕？我之所以举了这两个例子，是因为在 JavaScript 的加法中其实只有两种规则：<strong>一种是 number + number</strong>,<strong>另一种是 string + string</strong>。</p>
+<p>我们从 <code>string +　？</code>的例子中很容易的可以得出一个结论，<strong>只要在某一个加法中，某一方是字符串，那么最后的结果一定是字符串。</strong></p>
+<p>但是这个结论只能解决我们很小的一部分疑惑，你可能存在类似下面的问题：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">number + boolean = ?</span><br><span class="line">number + <span class="literal">null</span> = ?</span><br><span class="line">number + <span class="literal">undefined</span> = ?</span><br><span class="line">number + object = ?</span><br></pre></td></tr></table></figure></p>
+<p>我觉得，想要理解这其中的转换，先得理解的是在一个加法运算中，隐式转换的潜规则到底是什么。</p>
+<p>首先，在 JavaScript 的加法中，会发生三种转换：</p>
+<p> **1. 原始类型转换 ToPrimitive</p>
+<ol start="2">
+<li>数字类型转换 ToNumber</li>
+<li>字符串类型转换 ToString**</li>
+</ol>
+<p>而转换的顺序永远是 <code>ToPrimitive</code>也就是原始类型转换优先。</p>
+<p>那么什么是 <strong>原始类型转换</strong>？</p>
+<p>我们可以把原始类型转换分为两种，第一种是简单基本类型之间互转，比如：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">number -&gt; string</span><br><span class="line">string -&gt; number</span><br><span class="line"><span class="literal">null</span> -&gt; number</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<p>这其中的转换没什么要注意的地方，大家把我在上面借用过来的图里的内容记下来就行。</p>
+<p>关键点在于第二种，复杂基本类型到简单基本类型的转换：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">object -&gt; number</span><br><span class="line">object -&gt; string</span><br><span class="line"></span><br><span class="line">array -&gt; number</span><br><span class="line">array -&gt; string</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> -&gt; <span class="title">number</span></span></span><br><span class="line"><span class="function"><span class="title">function</span> -&gt; <span class="title">string</span></span></span><br></pre></td></tr></table></figure></p>
+<p>okok,有了上面的基础，我们再来讲讲原始类型转换的工作原理，老规矩，我们打开ECMAScript的官网<a href="http://www.ecma-international.org/ecma-262/5.1/" target="_blank" rel="noopener">ecmascript 5.1规范</a>，找到 9.1 节，里面就有关于 ~ToPrimitive</p>
+<p>我给大家放下原版内容：<br><img src="https://img-blog.csdnimg.cn/20190118094438440.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><strong>大概解释如下</strong>：<br><code>ToPrimitive</code> 接受一个值 <code>input</code>，和一个可选的期望类型 <code>PreferredType</code> 作参数。<br>可选参数 <code>PreferredType</code> 可以是 <code>Number</code> 或者 <code>String</code>。</p>
+<p>如果对象有能力被转换为不止一种原语类型，可以使用可选的 PreferredType 类型 来<strong>暗示</strong>那个类型，但转换结果一定是一个原始值。</p>
+<p><strong>如果 PreferredType 被标志为 Number，则会进行下面的操作来转换input:</strong></p>
+<ol>
+<li>如果 input 是个原始值，则直接返回它。 否则，如果 input 是一个对象。则调用 obj.valueOf() 方法。</li>
+<li>如果返回值是一个原始值，则返回这个原始值。 否则，调用 obj.toString() 方法。 如果返回值是一个原始值，则返回这个原始值。</li>
+<li>否则，抛出 TypeError异常。如果PreferredType被标志为String，则转换操作的第二步和第三步的顺序会调换。</li>
+</ol>
+<p><strong>如果没有 PreferredType 这个参数，则PreferredType的值会按照这样的规则来自动设置：</strong></p>
+<ol>
+<li>Date 类型的对象会被设置为 String</li>
+<li>其它类型的值会被设置为 Number</li>
+</ol>
+<p>OK,现在我们知道了 原始数据类型转换的大致工作流程，我们来看看在一个 加法 中会发生什么？</p>
+<p>有两个参数 <code>value1</code> 和 <code>value2</code>,有以下算式：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">value1 + value2</span><br></pre></td></tr></table></figure></p>
+<p><strong>这时在 JavaScript 引擎内部会发生以下这三步：</strong></p>
+<ol>
+<li>通过 <code>ToPrimitive</code> 将 <code>value1</code> 和 <code>value2</code> 转化为原始值，此时 <code>PreferredType</code>参数是被忽略的，所以除了 Date 类型外其他类型都会按照 Number 参数来处理。</li>
+<li>此时如果 <code>value1</code> 和 <code>value2</code> 中有一个 <code>string</code> 类型，调用 <code>ToString</code> 方法将另一个参数转化为 <code>string</code> 类型并进行字符串的拼接。</li>
+<li>如果 <code>value1</code> 和 <code>value2</code> 中一个 <code>string</code> 类型都没有，那么则通过 <code>ToNumber</code> 方法将两个参数都转化为 <code>number</code> 类型。</li>
+</ol>
+<p>我举几个例子帮助大家理解下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> + <span class="string">'2'</span> = <span class="string">'12'</span> ;</span><br></pre></td></tr></table></figure></p>
+<p>1被 <code>ToPrimitive</code> 返回其自身的原始值 <code>number</code>， ‘2’的原始值为  <code>string</code> ，命中条件2，所以1被 <code>ToString</code> 转化为 ‘1’, ‘1’ 与 ‘2’ 进行拼接后得到 ‘12’;</p>
+<p>再看一个例子：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> + [] = <span class="string">'1'</span>;</span><br></pre></td></tr></table></figure></p>
+<p>1被 <code>ToPrimitive</code> 返回其自身的原始值 <code>number</code>， [] 则不太一样，首先它会调用 valueOf()函数<code>[].valueOf() === []</code>得到 <code>array</code>,这并不是原始值，所以它会进行 <code>toString()</code> 转换，得到空字符串 <code>&quot;&quot;</code>。然后<code>&quot;&quot;</code>与 1 相加显然就是拼接了，最终得到<code>&#39;1&#39;</code>;</p>
+<p>再来一个：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> + &#123;&#125; = <span class="number">1</span>;</span><br></pre></td></tr></table></figure></p>
+<p>1被 <code>ToPrimitive</code> 返回其自身的原始值 <code>number</code>，{} 与 [] 又不太一样，{} 为对象，它会进行<code>ToPrimitive({}, string)</code> 操作，此时它与 <code>Number</code>类型中的步骤2,3是相反的，也就是说它会直接调用 <code>toString()</code> 方法，得到 <code>&quot;[object object]&quot;</code>,类型为 <code>string</code>,此时又命中条件2,1被转化为<code>&#39;1&#39;</code>,进行字符串拼接后得到<code>&quot;1[object object]&quot;</code>。</p>
+<p>现在是不是清晰多了？整个工作原理，我们可以把它分为三部分：<br><strong>1.简单基本类型之间的转化规则：</strong></p>
+<p><strong>2.原始基本类型的转化原则。<br>3.加法中的执行顺序。</strong></p>
+<h2 id="三-害人的的语句优先"><a href="#三-害人的的语句优先" class="headerlink" title="三. 害人的的语句优先"></a>三. 害人的的语句优先</h2><p>有这么一种情况，会让人疑惑：<br>在浏览器控制台输入以下代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#125; + <span class="number">1</span>   <span class="comment">//  return 1 number;</span></span><br><span class="line"><span class="number">1</span> + &#123;&#125;   <span class="comment">//return '1[object object]' string</span></span><br></pre></td></tr></table></figure></p>
+<p>如图：<br><img src="https://img-blog.csdnimg.cn/20190118094456545.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>还有更让人疑惑的：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#125; + <span class="number">1</span>  <span class="comment">//  return 1 number;</span></span><br><span class="line"><span class="built_in">console</span>.log(&#123;&#125; + <span class="number">1</span>)  <span class="comment">//  logs '1[object object]' string</span></span><br></pre></td></tr></table></figure></p>
+<p>如图：<br><img src="https://img-blog.csdnimg.cn/20190118094506945.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>这一切的根源就在于 <code>{}</code>的特殊表现，实际上在 JavaScript 的执行上下文中，<code>{}</code>有以下三种含义：</p>
+<ol>
+<li>语句块</li>
+<li>函数</li>
+<li>对象字面量</li>
+</ol>
+<p>而其中 <strong>语句块</strong> 这个含义的<strong>优先级是最高的</strong>。</p>
+<p>所以，以下这段代码中的<code>{}</code>相当于全局环境中的 <code>label</code> 语句了：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#125; + <span class="number">1</span></span><br></pre></td></tr></table></figure></p>
+<p>实际上等于：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#125;;+<span class="number">1</span></span><br></pre></td></tr></table></figure></p>
+<p>即：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+<span class="number">1</span></span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://wawisready.github.io/2018/03/02/JavaScript 中神奇的加法（隐式类型转换）/" data-id="cjtvibbb6000fuovduxb0a37z" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/03/11/从JavaScript的垃圾回收机制谈起/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          从 JavaScript 的垃圾回收机制谈起
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/02/13/TopTal 进阶 JavaScript 面试题/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">TopTal 进阶 JavaScript 面试题</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/D3-js/">D3.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Echarts/">Echarts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端自动化/">前端自动化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/框架/">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试题/">面试题</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/D3-js/" style="font-size: 16.67px;">D3.js</a> <a href="/tags/Echarts/" style="font-size: 10px;">Echarts</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/前端自动化/" style="font-size: 13.33px;">前端自动化</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/面试题/" style="font-size: 10px;">面试题</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/03/30/从-Promise-来看-JavaScript-的异步处理/">从 Promise 来看 JavaScript 的异步处理</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/26/UI recorder 自动化UI测试框架使用手册/">UI recorder 自动化UI测试框架使用手册</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/20/原生JS实现并封装前端路由/">原生 JavaScript 实现并封装前端路由</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/19/Karma 自动化测试框架搭建文档/">Karma 自动化测试框架搭建文档</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/06/JavaScript事件委托机制与this的比较/">JavaScript事件委托机制与this的比较</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Eiwen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

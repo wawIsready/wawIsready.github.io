@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>UI recorder 自动化UI测试框架使用手册 | Eiwen的前端小站</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一.前言此文档为前端自动化UI测试框架 UI recorder 的搭建以及使用文档。 二.准备环境 我们需要准备以下环境，安装顺序没有先后，环境之间相互无依赖：  安装 java jdk（需要jdk 1.8及以上），并配置相应的环境变量。 安装 node.js 和 npm。 配置 npm 国内镜像 cnpm。  2.1 安装 java jdk  打开 java官网，找到你系统对应的jdk版本，点击">
+<meta name="keywords" content="前端自动化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UI recorder 自动化UI测试框架使用手册">
+<meta property="og:url" content="https://wawisready.github.io/2018/05/26/UI recorder 自动化UI测试框架使用手册/index.html">
+<meta property="og:site_name" content="Eiwen的前端小站">
+<meta property="og:description" content="一.前言此文档为前端自动化UI测试框架 UI recorder 的搭建以及使用文档。 二.准备环境 我们需要准备以下环境，安装顺序没有先后，环境之间相互无依赖：  安装 java jdk（需要jdk 1.8及以上），并配置相应的环境变量。 安装 node.js 和 npm。 配置 npm 国内镜像 cnpm。  2.1 安装 java jdk  打开 java官网，找到你系统对应的jdk版本，点击">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190328173540369.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019032817355618.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190328174932806.PNG">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/201903281749400.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190328174951676.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190328174958115.PNG">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190328175007692.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190328175021635.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190328175027959.PNG">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190328175035642.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190328175046696.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190328175055552.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190328175106700.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190328175116120.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190328175122555.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190328175131672.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190328175139339.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190328175147542.PNG">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190328175153140.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190328175159477.PNG">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190328175205605.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-03-30T13:15:22.622Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="UI recorder 自动化UI测试框架使用手册">
+<meta name="twitter:description" content="一.前言此文档为前端自动化UI测试框架 UI recorder 的搭建以及使用文档。 二.准备环境 我们需要准备以下环境，安装顺序没有先后，环境之间相互无依赖：  安装 java jdk（需要jdk 1.8及以上），并配置相应的环境变量。 安装 node.js 和 npm。 配置 npm 国内镜像 cnpm。  2.1 安装 java jdk  打开 java官网，找到你系统对应的jdk版本，点击">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190328173540369.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70">
+  
+    <link rel="alternate" href="/atom.xml" title="Eiwen的前端小站" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Eiwen的前端小站</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://wawisready.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-UI recorder 自动化UI测试框架使用手册" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/26/UI recorder 自动化UI测试框架使用手册/" class="article-date">
+  <time datetime="2018-05-26T14:04:05.000Z" itemprop="datePublished">2018-05-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      UI recorder 自动化UI测试框架使用手册
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一-前言"><a href="#一-前言" class="headerlink" title="一.前言"></a><strong>一.前言</strong></h2><p>此文档为前端自动化UI测试框架 <code>UI recorder</code> 的搭建以及使用文档。</p>
+<h2 id="二-准备环境"><a href="#二-准备环境" class="headerlink" title="二.准备环境"></a><strong>二.准备环境</strong></h2><!--<p class="node-title"></p>-->
+<p>我们需要准备以下环境，安装顺序没有先后，环境之间相互无依赖：</p>
+<ol>
+<li>安装 java jdk（需要jdk 1.8及以上），并配置相应的环境变量。</li>
+<li>安装 node.js 和 npm。</li>
+<li>配置 npm 国内镜像 cnpm。</li>
+</ol>
+<p class="node-title">2.1 安装 java jdk</p>
+
+<p>打开 <a href="https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="noopener">java官网</a>，找到你系统对应的<code>jdk</code>版本，点击下载。如下图：<br><img src="https://img-blog.csdnimg.cn/20190328173540369.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>下载完成后傻瓜式安装，记住你的安装路径，我们添加系统环境变量时需要用到。</p>
+<p>安装完成后<strong>我们需要添加两个环境变量，修改一个环境变量</strong>，如下所示：</p>
+<ol>
+<li>新增变量 <code>JAVA_HOME</code>， 变量值为 <code>C:\Program Files\Java\jdk1.8.0_201</code>（你的 jdk 安装路径）;</li>
+<li>新增变量 <code>CLASSPATH</code>, 变量值为 <code>.;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar;</code></li>
+<li>修改变量<code>Path</code>, 在此变量值的最后加上<code>%JAVA_HOME%\bin;</code></li>
+</ol>
+<p>配置完成后打开终端输入<code>javac</code>,看见如下提示即安装成功：</p>
+<p><img src="https://img-blog.csdnimg.cn/2019032817355618.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p class="node-title">2.2 安装 nodejs 和 npm</p>
+
+<p>到官网下载安装包后按指示安装即可，参照<code>Karma</code>安装文档里安装即可。</p>
+<p class="node-title">2.3 配置 cnpm</p>
+
+<p>打开终端，输入如下指令：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g cnpm --registry=https:<span class="comment">//registry.npm.taobao.org</span></span><br></pre></td></tr></table></figure></p>
+<p>完成后输入以下命令测试<code>cnpm</code>是否安装成功：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm -v</span><br></pre></td></tr></table></figure></p>
+<h2 id="三-搭建-UI-recorder"><a href="#三-搭建-UI-recorder" class="headerlink" title="三.搭建 UI recorder"></a><strong>三.搭建 <code>UI recorder</code></strong></h2><p>我们需要按顺序进行以下步骤（考虑到以后阅读人员的时间跨度问题，如果遇到某些包报版本警告，在 <code>packagejson</code> 中把此包的版本号删除后再执行<code>cnpm install -D</code>即可）</p>
+<ol>
+<li>全局安装 <code>uirecorder</code> 和 <code>mocha</code>。</li>
+<li>安装相关包依赖。</li>
+<li>初始化 <code>uirecorder</code> 文件夹。（此处有坑，需注意）</li>
+<li>对远程服务器中的网站进行录制并生成测试脚本。</li>
+<li>下载 <code>chromedriver</code>，并将<code>chromedriver.exe</code>放到指定的位置。（需要和你的<code>chrome</code>版本对应）</li>
+<li>下载 <code>Selenium Server</code>。</li>
+<li>安装 <code>webDriver</code> 以及生成测试报告的包依赖。</li>
+</ol>
+<p>下面我们一步步来讲这6个步骤。</p>
+<p class="node-title">3.1 全局安装 uirecorder 和 mocha</p>
+
+<p>首先，新建一个文件夹，本文以如下文件夹为例：</p>
+<p><img src="https://img-blog.csdnimg.cn/20190328174932806.PNG" alt="在这里插入图片描述"></p>
+<p>打开<code>gitbash</code>，cd 到此文件夹目录下，初始化<code>packagejson</code>文件：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm init -y</span><br></pre></td></tr></table></figure></p>
+<p>然后执行以下代码全局安装包：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install uirecorder mocha -g</span><br></pre></td></tr></table></figure></p>
+<p>如下所示：</p>
+<p><img src="https://img-blog.csdnimg.cn/201903281749400.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>安装完成后我们可以输入<code>uirecorder -V</code>来查看是否安装成功：</p>
+<p><img src="https://img-blog.csdnimg.cn/20190328174951676.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p class="node-title">3.2 安装相关包依赖</p>
+
+<p>执行以下命令：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install jwebdriver expect.js mocha-generators faker --save-dev</span><br></pre></td></tr></table></figure></p>
+<p>如下图所示：</p>
+<p><img src="https://img-blog.csdnimg.cn/20190328174958115.PNG" alt="在这里插入图片描述"></p>
+<p class="node-title">3.3 初始化 uirecorder 文件夹</p>
+
+<p>在<code>git bash</code> 中输入以下指令：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uirecorder init</span><br></pre></td></tr></table></figure></p>
+<p>然后按照命令提示进行配置。这儿要提醒大家的是，本文中进行的是基础配置，诸位肯定会有特殊需求，可以根据需要自行配置。如果没有特殊要求，则可以按照下面的基础配置来操作：</p>
+<p><img src="https://img-blog.csdnimg.cn/20190328175007692.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>简单解释下上面那些命令各自的含义，见下图：</p>
+<p><img src="https://img-blog.csdnimg.cn/20190328175021635.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>配置完成后会在<code>/ui-recorder-standard</code>下出现以下文件结构：</p>
+<p><img src="https://img-blog.csdnimg.cn/20190328175027959.PNG" alt="在这里插入图片描述"></p>
+<p>到这我们的准备环节算是顺利成功了，下一步就要开始录制环节了。</p>
+<p class="node-title">3.4 录制并生成脚本</p>
+
+<p>在<code>gitbash</code>中执行以下命令：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uirecorder start sample/test.spec.js</span><br></pre></td></tr></table></figure></p>
+<p>则会出现交互式命令配置需要你选择，无特殊需求可按下图来配置：</p>
+<p><img src="https://img-blog.csdnimg.cn/20190328175035642.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>完成后会弹出两个浏览器，一个是给你操作交互的浏览器A，一个是自动录制的浏览器B，我们主要是操作浏览器A：</p>
+<p><img src="https://img-blog.csdnimg.cn/20190328175046696.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>本文以 Web 部内部的控制中心举例，远程访问 ip 为 <code>192.168.10.36:7002</code> 机器上的控制中心，点击<strong>开始录制</strong>后开始进行操作，触发各种交互事件：</p>
+<p><img src="https://img-blog.csdnimg.cn/20190328175055552.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>可以看到我们进行的每一步操作，在短暂的延时后都会得到及时的反馈，在右下角弹窗出来。</p>
+<p>操作完成后点击<strong>结束录制</strong>即可，此时已经在根目录下生成了<code>/sample</code>文件夹和<code>test.spac.js</code>测试用例文件。</p>
+<p>需要注意的是，理论上你也可以直接修改这个测试用例文件，但是这需要一定的<code>nodejs</code>基础，如果你对此并不熟练，我不建议你修改此文件，以免后面的录制回放阶段出现无法预知的错误。</p>
+<p class="node-title">3.5 下载 chromedriver，并将 chromedriver.exe 放到指定的位置</p>
+
+<p>从 3.5 之后这几步的作用主要是启动 <code>webDriver</code> 服务以支撑 <code>uirecorder</code> 进行自动化的录制回放和生成测试报告。这几步相对比较繁琐，我尽量用简洁的语言和图片补充的形式避免大家踩坑。</p>
+<p>我们首先要下载 <code>chromedriver</code> 压缩文件。提供一个<a href="https://npm.taobao.org/mirrors/chromedriver" target="_blank" rel="noopener">chromedriver淘宝镜像地址</a>。</p>
+<p>打开后我们会发现有很多版本，这里要注意，必须要下载和你的<code>chrome</code>对应的驱动才行。</p>
+<p>打开<code>chrome</code>查看版本号:</p>
+<p><img src="https://img-blog.csdnimg.cn/20190328175106700.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>然后按照这个对照表来下载对应的驱动：</p>
+<p><img src="https://img-blog.csdnimg.cn/20190328175116120.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>如果以上对应表不适用于你的 <code>chrome</code> 浏览器，你也可以自行 google 或者升级浏览器版本。</p>
+<p>下载下来后是一个压缩包，把解压出来的 <code>chromedriver.exe</code> 文件放到你的 <code>chrome</code> 安装目录下：</p>
+<p><img src="https://img-blog.csdnimg.cn/20190328175122555.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>还没完，最后你需要把此目录加到系统环境变量<code>Path</code>变量值的最后：</p>
+<p><img src="https://img-blog.csdnimg.cn/20190328175131672.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>此步目的是要让 <code>SeleniumServer</code> 能够直接通过文件名找到对应的 <code>driver</code>。</p>
+<p class="node-title">3.6 下载 Selenium Server</p>
+
+<p>点击 <a href="https://selenium-release.storage.googleapis.com/index.html" target="_blank" rel="noopener">Selenium Server</a> 下载最新版即可。下载完成后会得到一个<code>selenium-server-standalone-3.9.1.jar</code>的文件，把它放入 <code>/ui-recorder-standard</code> 目录下：</p>
+<p><img src="https://img-blog.csdnimg.cn/20190328175139339.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p class="node-title">3.7 安装 <code>webDriver</code> 以及生成测试报告的包依赖</p>
+
+<p>打开 <code>gitbash</code> 并执行以下命令：<br><figure class="highlight javascript"><figcaption><span>&#123;.line-numbers&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cnpm install selenium-standalone -g</span><br><span class="line">cnpm install mochawesome chai resemblejs-node -D</span><br></pre></td></tr></table></figure></p>
+<h2 id="四-录制回放及生成测试报告"><a href="#四-录制回放及生成测试报告" class="headerlink" title="四.录制回放及生成测试报告"></a><strong>四.录制回放及生成测试报告</strong></h2><p>我们按以下步骤顺序进行：</p>
+<ol>
+<li>启动 <code>Selenium Server</code>。</li>
+<li>执行回放命令，查看报告。</li>
+</ol>
+<p class="node-title">4.1 启动 Selenium Server</p>
+
+<p>在 <code>/ui-recorder-standard</code> 目录下新开一个 <code>gitbash</code> 终端，执行以下命令开启 <code>Selenium Server</code>:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar selenium-server-standalone<span class="number">-3.9</span><span class="number">.1</span>.jar</span><br></pre></td></tr></table></figure></p>
+<p>但是如果你已经开启了一个默认是 4444 端口的<code>server</code>，执行这一步就会提示你以下异常：</p>
+<p><img src="https://img-blog.csdnimg.cn/20190328175147542.PNG" alt="在这里插入图片描述"></p>
+<p>这时我们根据提示使用指定端口的命令即可：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar selenium-server-standalone<span class="number">-3.9</span><span class="number">.1</span>.jar -port <span class="number">4002</span></span><br></pre></td></tr></table></figure></p>
+<p>成功后如下图所示：</p>
+<p><img src="https://img-blog.csdnimg.cn/20190328175153140.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p class="node-title">4.2 执行回放命令，查看报告</p>
+
+<p>打开<code>git bash</code>执行以下命令：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mocha sample/test.spec.js --reporter mochawesome</span><br></pre></td></tr></table></figure></p>
+<p>等待终端执行完毕后，可以看到根目录下生成了<code>/mochawesome-report</code>文件夹，文件夹内包含测试报告。</p>
+<p><img src="https://img-blog.csdnimg.cn/20190328175159477.PNG" alt="在这里插入图片描述"></p>
+<p>测试报告如下图：</p>
+<p><img src="https://img-blog.csdnimg.cn/20190328175205605.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://wawisready.github.io/2018/05/26/UI recorder 自动化UI测试框架使用手册/" data-id="cjtviqeqg0013uovdye6nxifn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端自动化/">前端自动化</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/03/30/从-Promise-来看-JavaScript-的异步处理/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          从 Promise 来看 JavaScript 的异步处理
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/05/20/原生JS实现并封装前端路由/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">原生 JavaScript 实现并封装前端路由</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/D3-js/">D3.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Echarts/">Echarts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端自动化/">前端自动化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/框架/">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试题/">面试题</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/D3-js/" style="font-size: 16.67px;">D3.js</a> <a href="/tags/Echarts/" style="font-size: 10px;">Echarts</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/前端自动化/" style="font-size: 13.33px;">前端自动化</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/面试题/" style="font-size: 10px;">面试题</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/03/30/从-Promise-来看-JavaScript-的异步处理/">从 Promise 来看 JavaScript 的异步处理</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/26/UI recorder 自动化UI测试框架使用手册/">UI recorder 自动化UI测试框架使用手册</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/20/原生JS实现并封装前端路由/">原生 JavaScript 实现并封装前端路由</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/19/Karma 自动化测试框架搭建文档/">Karma 自动化测试框架搭建文档</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/06/JavaScript事件委托机制与this的比较/">JavaScript事件委托机制与this的比较</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Eiwen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
