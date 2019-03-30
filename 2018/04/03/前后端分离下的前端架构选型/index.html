@@ -1,93 +1,306 @@
 <!DOCTYPE html>
-<html>
-<head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="utf-8">
+
+
+
   
-  <title>前后端分离下的前端架构选型 | Eiwen的前端小站</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一.主要目标1.前后端解耦。前端主要任务是将原有页面中的大量的Python Flask框架里的jinja2模板内容给替换，采用纯粹的JavaScript模板引擎来进行解耦。2.前后端分离。前端拥有自己的静态资源服务器和路由，负责静态文件的转发和html页面的返回。 二.几种技术选型方案选型方案，将从重构成本，人员成本(即学习成本)，部署难度等几方面考虑。 方案一： art-template（用于h">
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="框架,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一.主要目标1.前后端解耦。前端主要任务是将原有页面中的大量的Python Flask框架里的jinja2模板内容给替换，采用纯粹的JavaScript模板引擎来进行解耦。2.前后端分离。前端拥有自己的静态资源服务器和路由，负责静态文件的转发和html页面的返回。">
 <meta name="keywords" content="框架">
 <meta property="og:type" content="article">
 <meta property="og:title" content="前后端分离下的前端架构选型">
 <meta property="og:url" content="https://wawisready.github.io/2018/04/03/前后端分离下的前端架构选型/index.html">
 <meta property="og:site_name" content="Eiwen的前端小站">
-<meta property="og:description" content="一.主要目标1.前后端解耦。前端主要任务是将原有页面中的大量的Python Flask框架里的jinja2模板内容给替换，采用纯粹的JavaScript模板引擎来进行解耦。2.前后端分离。前端拥有自己的静态资源服务器和路由，负责静态文件的转发和html页面的返回。 二.几种技术选型方案选型方案，将从重构成本，人员成本(即学习成本)，部署难度等几方面考虑。 方案一： art-template（用于h">
+<meta property="og:description" content="一.主要目标1.前后端解耦。前端主要任务是将原有页面中的大量的Python Flask框架里的jinja2模板内容给替换，采用纯粹的JavaScript模板引擎来进行解耦。2.前后端分离。前端拥有自己的静态资源服务器和路由，负责静态文件的转发和html页面的返回。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-30T13:20:48.877Z">
+<meta property="og:updated_time" content="2019-03-30T13:50:55.913Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前后端分离下的前端架构选型">
-<meta name="twitter:description" content="一.主要目标1.前后端解耦。前端主要任务是将原有页面中的大量的Python Flask框架里的jinja2模板内容给替换，采用纯粹的JavaScript模板引擎来进行解耦。2.前后端分离。前端拥有自己的静态资源服务器和路由，负责静态文件的转发和html页面的返回。 二.几种技术选型方案选型方案，将从重构成本，人员成本(即学习成本)，部署难度等几方面考虑。 方案一： art-template（用于h">
+<meta name="twitter:description" content="一.主要目标1.前后端解耦。前端主要任务是将原有页面中的大量的Python Flask框架里的jinja2模板内容给替换，采用纯粹的JavaScript模板引擎来进行解耦。2.前后端分离。前端拥有自己的静态资源服务器和路由，负责静态文件的转发和html页面的返回。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://wawisready.github.io/2018/04/03/前后端分离下的前端架构选型/">
+
+
+
+
+
+  <title>前后端分离下的前端架构选型 | Eiwen的前端小站</title>
   
-    <link rel="alternate" href="/atom.xml" title="Eiwen的前端小站" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
+
+
+
+
+
+
+
 
 </head>
-</html>
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Eiwen的前端小站</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://wawisready.github.io"></form>
-      </div>
-    </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-前后端分离下的前端架构选型" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/04/03/前后端分离下的前端架构选型/" class="article-date">
-  <time datetime="2018-04-03T15:21:04.000Z" itemprop="datePublished">2018-04-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
   
-    <h1 class="article-title" itemprop="name">
-      前后端分离下的前端架构选型
-    </h1>
+  
+    
   
 
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Eiwen的前端小站</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wawisready.github.io/2018/04/03/前后端分离下的前端架构选型/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eiwen">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Eiwen的前端小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">前后端分离下的前端架构选型</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-03T23:21:04+08:00">
+                2018-04-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-        <h2 id="一-主要目标"><a href="#一-主要目标" class="headerlink" title="一.主要目标"></a>一.主要目标</h2><p>1.<strong>前后端解耦</strong>。前端主要任务是将原有页面中的大量的<code>Python Flask</code>框架里的<code>jinja2</code>模板内容给替换，采用纯粹的<code>JavaScript</code>模板引擎来进行解耦。<br>2.<strong>前后端分离</strong>。前端拥有自己的静态资源服务器和路由，负责静态文件的转发和<code>html</code>页面的返回。</p>
+      
+
+      
+        <h2 id="一-主要目标"><a href="#一-主要目标" class="headerlink" title="一.主要目标"></a>一.主要目标</h2><p>1.<strong>前后端解耦</strong>。前端主要任务是将原有页面中的大量的<code>Python Flask</code>框架里的<code>jinja2</code>模板内容给替换，采用纯粹的<code>JavaScript</code>模板引擎来进行解耦。<br>2.<strong>前后端分离</strong>。前端拥有自己的静态资源服务器和路由，负责静态文件的转发和<code>html</code>页面的返回。<br><a id="more"></a> </p>
 <h2 id="二-几种技术选型方案"><a href="#二-几种技术选型方案" class="headerlink" title="二.几种技术选型方案"></a>二.几种技术选型方案</h2><p>选型方案，将从重构成本，人员成本(即学习成本)，部署难度等几方面考虑。</p>
 <p><strong>方案一</strong>： <a href="http://aui.github.io/art-template/" target="_blank" rel="noopener">art-template（用于html文件解耦）</a> + <a href="http://www.expressjs.com.cn/" target="_blank" rel="noopener">node.js(express)(用于静态资源返回 + 前端路由)</a> + <a href="http://mockjs.com/" target="_blank" rel="noopener">Mock.js（用于模拟伪后端数据）</a>   </p>
 <p>方案优缺点：<br>1.<code>art-template</code>。由腾讯出品，github 有人维护，API 详细，插件相关生态也还不错，利于快速上手，重构成本相对较低。但是此模板引擎的模板继承功能必须由 node 服务提供，所以前端中间层只能是 node，强耦合。</p>
@@ -105,136 +318,379 @@
 
       
     </div>
-    <footer class="article-footer">
-      <a data-url="https://wawisready.github.io/2018/04/03/前后端分离下的前端架构选型/" data-id="cjtvibbcp000juovds15hu7tq" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/框架/">框架</a></li></ul>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/框架/" rel="tag"># 框架</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/03/D3.js制作带悬浮提示框的渐变色中国地图（使用node.js提供服务）/" rel="next" title="D3.js 制作带悬浮提示框的渐变色中国地图（使用node.js提供服务）">
+                <i class="fa fa-chevron-left"></i> D3.js 制作带悬浮提示框的渐变色中国地图（使用node.js提供服务）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/04/JavaScript 闭包机制的详解/" rel="prev" title="JavaScript 闭包机制的详解">
+                JavaScript 闭包机制的详解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
     </footer>
   </div>
   
-    
-<nav id="article-nav">
   
-    <a href="/2018/04/04/JavaScript 闭包机制的详解/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
         
-          JavaScript 闭包机制的详解
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Eiwen</p>
+              <p class="site-description motion-element" itemprop="description">web前端</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-主要目标"><span class="nav-number">1.</span> <span class="nav-text">一.主要目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-几种技术选型方案"><span class="nav-number">2.</span> <span class="nav-text">二.几种技术选型方案</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
         
       </div>
-    </a>
-  
-  
-    <a href="/2018/04/03/D3.js制作带悬浮提示框的渐变色中国地图（使用node.js提供服务）/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">D3.js 制作带悬浮提示框的渐变色中国地图（使用node.js提供服务）</div>
-    </a>
-  
-</nav>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Eiwen</span>
 
   
-</article>
+</div>
 
-</section>
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
         
-          <aside id="sidebar">
-  
-    
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/D3-js/">D3.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Echarts/">Echarts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端自动化/">前端自动化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/框架/">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试题/">面试题</a></li></ul>
-    </div>
-  </div>
 
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/D3-js/" style="font-size: 16.67px;">D3.js</a> <a href="/tags/Echarts/" style="font-size: 10px;">Echarts</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/前端自动化/" style="font-size: 13.33px;">前端自动化</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/面试题/" style="font-size: 10px;">面试题</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li></ul>
-    </div>
-  </div>
 
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2019/03/30/从-Promise-来看-JavaScript-的异步处理/">从 Promise 来看 JavaScript 的异步处理</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/26/UI recorder 自动化UI测试框架使用手册/">UI recorder 自动化UI测试框架使用手册</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/20/原生JS实现并封装前端路由/">原生 JavaScript 实现并封装前端路由</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/19/Karma 自动化测试框架搭建文档/">Karma 自动化测试框架搭建文档</a>
-          </li>
-        
-          <li>
-            <a href="/2018/04/06/JavaScript事件委托机制与this的比较/">JavaScript事件委托机制与this的比较</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
 
-  
-</aside>
+
+
         
       </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2019 Eiwen<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
     
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/js/script.js"></script>
+    
 
   </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
 </body>
 </html>

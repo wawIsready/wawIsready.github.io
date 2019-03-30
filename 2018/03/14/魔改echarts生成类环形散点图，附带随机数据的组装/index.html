@@ -1,231 +1,663 @@
 <!DOCTYPE html>
-<html>
-<head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="utf-8">
+
+
+
   
-  <title>魔改 Echarts 生成类环形散点图，附带随机数据的组装 | Eiwen的前端小站</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="我们先看效果图，如下图所示：接下来是代码部分，首先准备一个容器：1234 &amp;lt;div class=&quot;col-sm-12 chart&quot; id=&quot;backImage&quot;&amp;gt;      &amp;lt;div id=&quot;monitor-rada&quot; class=&quot;rada&quot;&amp;gt;&amp;lt;/div&amp;gt;      &amp;lt;div id=&quot;monitor-info&quot; class=&quot;scatter&quot;&amp;gt;&amp;l">
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Echarts,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="我们先看效果图，如下图所示：接下来是代码部分，首先准备一个容器：1234 &amp;lt;div class=&quot;col-sm-12 chart&quot; id=&quot;backImage&quot;&amp;gt;      &amp;lt;div id=&quot;monitor-rada&quot; class=&quot;rada&quot;&amp;gt;&amp;lt;/div&amp;gt;      &amp;lt;div id=&quot;monitor-info&quot; class=&quot;scatter&quot;&amp;gt;">
 <meta name="keywords" content="Echarts">
 <meta property="og:type" content="article">
 <meta property="og:title" content="魔改 Echarts 生成类环形散点图，附带随机数据的组装">
 <meta property="og:url" content="https://wawisready.github.io/2018/03/14/魔改echarts生成类环形散点图，附带随机数据的组装/index.html">
 <meta property="og:site_name" content="Eiwen的前端小站">
-<meta property="og:description" content="我们先看效果图，如下图所示：接下来是代码部分，首先准备一个容器：1234 &amp;lt;div class=&quot;col-sm-12 chart&quot; id=&quot;backImage&quot;&amp;gt;      &amp;lt;div id=&quot;monitor-rada&quot; class=&quot;rada&quot;&amp;gt;&amp;lt;/div&amp;gt;      &amp;lt;div id=&quot;monitor-info&quot; class=&quot;scatter&quot;&amp;gt;&amp;l">
+<meta property="og:description" content="我们先看效果图，如下图所示：接下来是代码部分，首先准备一个容器：1234 &amp;lt;div class=&quot;col-sm-12 chart&quot; id=&quot;backImage&quot;&amp;gt;      &amp;lt;div id=&quot;monitor-rada&quot; class=&quot;rada&quot;&amp;gt;&amp;lt;/div&amp;gt;      &amp;lt;div id=&quot;monitor-info&quot; class=&quot;scatter&quot;&amp;gt;">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20181102144713619.gif">
-<meta property="og:updated_time" content="2019-03-30T13:22:42.478Z">
+<meta property="og:updated_time" content="2019-03-30T13:51:04.386Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="魔改 Echarts 生成类环形散点图，附带随机数据的组装">
-<meta name="twitter:description" content="我们先看效果图，如下图所示：接下来是代码部分，首先准备一个容器：1234 &amp;lt;div class=&quot;col-sm-12 chart&quot; id=&quot;backImage&quot;&amp;gt;      &amp;lt;div id=&quot;monitor-rada&quot; class=&quot;rada&quot;&amp;gt;&amp;lt;/div&amp;gt;      &amp;lt;div id=&quot;monitor-info&quot; class=&quot;scatter&quot;&amp;gt;&amp;l">
+<meta name="twitter:description" content="我们先看效果图，如下图所示：接下来是代码部分，首先准备一个容器：1234 &amp;lt;div class=&quot;col-sm-12 chart&quot; id=&quot;backImage&quot;&amp;gt;      &amp;lt;div id=&quot;monitor-rada&quot; class=&quot;rada&quot;&amp;gt;&amp;lt;/div&amp;gt;      &amp;lt;div id=&quot;monitor-info&quot; class=&quot;scatter&quot;&amp;gt;">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20181102144713619.gif">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://wawisready.github.io/2018/03/14/魔改echarts生成类环形散点图，附带随机数据的组装/">
+
+
+
+
+
+  <title>魔改 Echarts 生成类环形散点图，附带随机数据的组装 | Eiwen的前端小站</title>
   
-    <link rel="alternate" href="/atom.xml" title="Eiwen的前端小站" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
+
+
+
+
+
+
+
 
 </head>
-</html>
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Eiwen的前端小站</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://wawisready.github.io"></form>
-      </div>
-    </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-魔改echarts生成类环形散点图，附带随机数据的组装" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/03/14/魔改echarts生成类环形散点图，附带随机数据的组装/" class="article-date">
-  <time datetime="2018-03-14T07:31:49.000Z" itemprop="datePublished">2018-03-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
   
-    <h1 class="article-title" itemprop="name">
-      魔改 Echarts 生成类环形散点图，附带随机数据的组装
-    </h1>
+  
+    
   
 
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Eiwen的前端小站</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wawisready.github.io/2018/03/14/魔改echarts生成类环形散点图，附带随机数据的组装/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eiwen">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Eiwen的前端小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">魔改 Echarts 生成类环形散点图，附带随机数据的组装</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-14T15:31:49+08:00">
+                2018-03-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-        <p>我们先看效果图，如下图所示：<img src="https://img-blog.csdnimg.cn/20181102144713619.gif" alt="在这里插入图片描述"><br>接下来是代码部分，首先准备一个容器：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-sm-12 chart"</span> <span class="attr">id</span>=<span class="string">"backImage"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"monitor-rada"</span> <span class="attr">class</span>=<span class="string">"rada"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"monitor-info"</span> <span class="attr">class</span>=<span class="string">"scatter"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+      
+
+      
+        <a id="more"></a> 
+<p>我们先看效果图，如下图所示：<img src="https://img-blog.csdnimg.cn/20181102144713619.gif" alt="在这里插入图片描述"><br>接下来是代码部分，首先准备一个容器：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-sm-12 chart"</span> <span class="attr">id</span>=<span class="string">"backImage"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"monitor-rada"</span> <span class="attr">class</span>=<span class="string">"rada"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"monitor-info"</span> <span class="attr">class</span>=<span class="string">"scatter"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p>容器需提供样式：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*背景图片就是上图中的由很多环组成的圆形背景*/</span></span><br><span class="line"> <span class="selector-id">#backImage</span> &#123;</span><br><span class="line">            <span class="attribute">background</span>: <span class="built_in">url</span>(<span class="string">'/static/image/back1.png'</span>) no-repeat center;</span><br><span class="line">            <span class="attribute">height</span>: <span class="number">345px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#monitor-rada</span> &#123;</span><br><span class="line">       <span class="attribute">height</span>: <span class="number">345px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*这里添加position是为了让雷达图和散点图两个canvas叠加*/</span></span><br><span class="line"><span class="selector-id">#monitor-info</span> &#123;</span><br><span class="line">            <span class="attribute">height</span>: <span class="number">345px</span>;</span><br><span class="line">            <span class="attribute">position</span>: relative;</span><br><span class="line">            <span class="attribute">bottom</span>: <span class="number">345px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>接下来就是主要的js部分：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> infoChart = echarts.init(<span class="built_in">document</span>.getElementById(<span class="string">'monitor-info'</span>), <span class="string">"macarons"</span>);</span><br><span class="line"><span class="keyword">var</span> radaChart = echarts.init(<span class="built_in">document</span>.getElementById(<span class="string">'monitor-rada'</span>), <span class="string">"macarons"</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*******</span></span><br><span class="line"><span class="comment">     * @params : &#123;</span></span><br><span class="line"><span class="comment">     *      len: Its type must be number; It means the number of random numbers you want to get. ---necessary</span></span><br><span class="line"><span class="comment">     *      start: Its type must be number; It means the beginning of the range of random numbers you want to get.. ---necessary</span></span><br><span class="line"><span class="comment">     *      end: Its type must be number; It means the end of the range of random numbers you want to get. ---necessary</span></span><br><span class="line"><span class="comment">     * &#125;</span></span><br><span class="line"><span class="comment">     * @returns : &#123;</span></span><br><span class="line"><span class="comment">     *      content: It will return an array of len non-repeating random numbers</span></span><br><span class="line"><span class="comment">     *      type:Array;</span></span><br><span class="line"><span class="comment">     * &#125;</span></span><br><span class="line"><span class="comment">     * @example : &#123;</span></span><br><span class="line"><span class="comment">     *      radomNum(10, 20, 40);</span></span><br><span class="line"><span class="comment">     *      [ 28, 39, 20, 25, 32, 38, 26, 37, 34, 29 ]</span></span><br><span class="line"><span class="comment">     * &#125;</span></span><br><span class="line"><span class="comment">     * @author:wananwen</span></span><br><span class="line"><span class="comment">     * @date: 1&gt; 2018.10.23 --- creat</span></span><br><span class="line"><span class="comment">     * */</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">randomNum</span>(<span class="params">len, start, end</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> arrNum = [];</span><br><span class="line">        <span class="keyword">var</span> difference = end - start;</span><br><span class="line">        <span class="keyword">while</span> (arrNum.length &lt; len) &#123;</span><br><span class="line">            <span class="keyword">var</span> randNum = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * difference + start);</span><br><span class="line">            <span class="keyword">if</span> (arrNum.indexOf(randNum) == <span class="number">-1</span>) &#123;</span><br><span class="line">                arrNum.push(randNum);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> arrNum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">initInfoChart</span>(<span class="params"> </span>) </span>&#123;</span><br><span class="line">     <span class="comment">//散点图option</span></span><br><span class="line">  <span class="keyword">var</span> infoOption = &#123;</span><br><span class="line">      tooltip: &#123;</span><br><span class="line">                zlevel: <span class="number">2</span>,</span><br><span class="line">                z: <span class="number">10</span>,</span><br><span class="line">                trigger: <span class="string">'item'</span>,</span><br><span class="line">                formatter: <span class="function"><span class="keyword">function</span> (<span class="params">params, ticket, callback</span>) </span>&#123;</span><br><span class="line">                   <span class="keyword">var</span> data = params[<span class="number">2</span>][<span class="number">3</span>];</span><br><span class="line">                   <span class="keyword">var</span> ip = data.ip;</span><br><span class="line">                   <span class="keyword">var</span> status = data.status;</span><br><span class="line">                    <span class="keyword">return</span> <span class="string">"此服务器IP为："</span> + ip + <span class="string">"&lt;br&gt;"</span> + <span class="string">"此服务器状态为："</span> + status</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;,</span><br><span class="line">                color: [<span class="string">'#F85A5B'</span>, <span class="string">'#FF7000'</span>, <span class="string">'#FDEA12'</span>, <span class="string">'#4060F3'</span>],</span><br><span class="line">                grid: &#123;</span><br><span class="line">                    show: <span class="string">'true'</span>,</span><br><span class="line">                    borderWidth: <span class="string">'0'</span></span><br><span class="line">                &#125;,</span><br><span class="line">                legend: &#123;</span><br><span class="line">                    x: <span class="string">'right'</span>,</span><br><span class="line">                    y: <span class="string">'90%'</span>,</span><br><span class="line">                    itemWidth: <span class="number">10</span>,</span><br><span class="line">                    itemHeight: <span class="number">10</span>,</span><br><span class="line">                    data: [<span class="string">'正常'</span>, <span class="string">'低'</span>, <span class="string">'中'</span>, <span class="string">'高'</span>]</span><br><span class="line">                &#125;,</span><br><span class="line">                xAxis: [</span><br><span class="line">                    &#123;</span><br><span class="line">                        type: <span class="string">'value'</span>,</span><br><span class="line">                        show: <span class="literal">false</span></span><br><span class="line">                    &#125;</span><br><span class="line">                ],</span><br><span class="line">                yAxis: [</span><br><span class="line">                    &#123;</span><br><span class="line">                        type: <span class="string">'value'</span>,</span><br><span class="line">                        show: <span class="literal">false</span></span><br><span class="line">                    &#125;</span><br><span class="line">                ],</span><br><span class="line">                series: [</span><br><span class="line">                    &#123;</span><br><span class="line">                        name: <span class="string">'正常'</span>,</span><br><span class="line">                        type: <span class="string">'scatter'</span>,</span><br><span class="line">                        itemStyle: &#123;</span><br><span class="line">                            normal: &#123;</span><br><span class="line">                                color: <span class="string">'#4060F3'</span></span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;,</span><br><span class="line">                        symbolSize: <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">                            <span class="keyword">return</span> <span class="built_in">Math</span>.round(value[<span class="number">2</span>] / <span class="number">5</span>);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;,</span><br><span class="line">                    &#123;</span><br><span class="line">                        name: <span class="string">'低'</span>,</span><br><span class="line">                        type: <span class="string">'scatter'</span>,</span><br><span class="line">                        itemStyle: &#123;</span><br><span class="line">                            normal: &#123;</span><br><span class="line">                                color: <span class="string">'#FDEA12'</span></span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;,</span><br><span class="line">                        symbolSize: <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">                            <span class="keyword">return</span> <span class="built_in">Math</span>.round(value[<span class="number">2</span>] / <span class="number">5</span>);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;, &#123;</span><br><span class="line">                        name: <span class="string">'中'</span>,</span><br><span class="line">                        type: <span class="string">'scatter'</span>,</span><br><span class="line">                        itemStyle: &#123;</span><br><span class="line">                            normal: &#123;</span><br><span class="line">                                color: <span class="string">'#FF7000'</span></span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;,</span><br><span class="line">                        symbolSize: <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">                            <span class="keyword">return</span> <span class="built_in">Math</span>.round(value[<span class="number">2</span>] / <span class="number">5</span>);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;,</span><br><span class="line">                    &#123;</span><br><span class="line">                        name: <span class="string">'高'</span>,</span><br><span class="line">                        type: <span class="string">'scatter'</span>,</span><br><span class="line">                        itemStyle: &#123;</span><br><span class="line">                            normal: &#123;</span><br><span class="line">                                color: <span class="string">'#F85A5B'</span></span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;,</span><br><span class="line">                        symbolSize: <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">                            <span class="keyword">return</span> <span class="built_in">Math</span>.round(value[<span class="number">2</span>] / <span class="number">5</span>);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;,</span><br><span class="line">                    &#123;</span><br><span class="line">                        name: <span class="string">'range'</span>,</span><br><span class="line">                        type: <span class="string">'scatter'</span>,</span><br><span class="line">                        symbolSize: <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">                            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                ]</span><br><span class="line">            &#125;;</span><br><span class="line">    <span class="comment">//雷达图</span></span><br><span class="line">     <span class="keyword">var</span> radarOption = &#123;</span><br><span class="line">         calculable: <span class="literal">false</span>,</span><br><span class="line">          series: (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                <span class="keyword">var</span> series = [];</span><br><span class="line">                 <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">30</span>; i++) &#123;</span><br><span class="line">                    series.push(&#123;</span><br><span class="line">                        name: <span class="string">'雷达'</span>,</span><br><span class="line">                        type: <span class="string">'pie'</span>,</span><br><span class="line">                        radius: [i * <span class="number">4</span> + <span class="number">35</span>, i * <span class="number">4</span> + <span class="number">38</span>],</span><br><span class="line">                        data: []</span><br><span class="line">                    &#125;)</span><br><span class="line">                &#125;</span><br><span class="line">               series[<span class="number">0</span>].markPoint = &#123;</span><br><span class="line">                   symbol: <span class="string">'emptyCircle'</span>,</span><br><span class="line">                   symbolSize: series[<span class="number">0</span>].radius[<span class="number">0</span>],</span><br><span class="line">                   effect: &#123;<span class="attr">show</span>: <span class="literal">true</span>, <span class="attr">scaleSize</span>: <span class="number">12</span>, <span class="attr">color</span>: <span class="string">'rgba(213,224,252,0.8)'</span>, <span class="attr">shadowBlur</span>: <span class="number">10</span>, <span class="attr">period</span>: <span class="number">40</span>&#125;,</span><br><span class="line">                   data: [&#123;<span class="attr">x</span>: <span class="string">'50%'</span>, <span class="attr">y</span>: <span class="string">'50%'</span>&#125;]</span><br><span class="line">                &#125;;</span><br><span class="line">              <span class="keyword">return</span> series;</span><br><span class="line">        &#125;)()</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line"><span class="comment">//初始化后台传过来的数据</span></span><br><span class="line"> <span class="keyword">var</span> json = &#123;</span><br><span class="line">             <span class="string">'status'</span>: <span class="number">0</span>,</span><br><span class="line">             <span class="string">'code'</span>: <span class="number">0</span>,</span><br><span class="line">             <span class="string">'msg'</span>: <span class="string">'success'</span>,</span><br><span class="line">             <span class="string">'data'</span>: &#123;</span><br><span class="line">                      <span class="string">'normal'</span>: [&#123;<span class="attr">ip</span>: <span class="string">"192.168.10.36"</span>, <span class="attr">status</span>: <span class="string">"ok"</span>&#125;, &#123;<span class="attr">ip</span>: <span class="string">"192.168.10.36"</span>, <span class="attr">status</span>: <span class="string">"ok"</span>&#125;],</span><br><span class="line">                      <span class="string">'low'</span>: [&#123;<span class="attr">ip</span>: <span class="string">"192.168.22.2"</span>, <span class="attr">status</span>: <span class="string">"ok"</span>&#125;, &#123;<span class="attr">ip</span>: <span class="string">"192.168.22.2"</span>, <span class="attr">status</span>: <span class="string">"ok"</span>&#125;],</span><br><span class="line">                     <span class="string">'middle'</span>: [&#123;<span class="attr">ip</span>: <span class="string">"192.168.10.36"</span>, <span class="attr">status</span>: <span class="string">"ok"</span>&#125;, &#123;<span class="attr">ip</span>: <span class="string">"192.168.10.36"</span>, <span class="attr">status</span>: <span class="string">"ok"</span>&#125;],</span><br><span class="line">                     <span class="string">'high'</span>: [&#123;<span class="attr">ip</span>: <span class="string">"192.168.22.2"</span>, <span class="attr">status</span>: <span class="string">"ok"</span>&#125;, &#123;<span class="attr">ip</span>: <span class="string">"192.168.22.2"</span>, <span class="attr">status</span>: <span class="string">"ok"</span>&#125;]</span><br><span class="line">             &#125;</span><br><span class="line">&#125;;</span><br><span class="line">                    </span><br><span class="line"> <span class="comment">//随机数据组装(确保散点分布在背景图周围)</span></span><br><span class="line"><span class="keyword">var</span> totalLen = json.data.normal.length + json.data.low.length + json.data.middle.length + json.data.high.length;</span><br><span class="line"><span class="keyword">var</span> randomArr = dataHandle.randomNum(totalLen, <span class="number">20</span>, <span class="number">40</span>);</span><br><span class="line"><span class="keyword">var</span> useArr = [];</span><br><span class="line"><span class="comment">// 动态分配随机数据</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">scatterDataInit</span>(<span class="params">sourceData</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> arr = [];</span><br><span class="line">      <span class="keyword">var</span> len = sourceData.length;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; randomArr.length; i++) &#123;</span><br><span class="line">           <span class="keyword">if</span> (arr.length &lt; len) &#123;</span><br><span class="line">               <span class="keyword">if</span> (randomArr.indexOf(useArr[i]) == <span class="number">-1</span>) &#123;</span><br><span class="line">                    arr.push(randomArr[i]);</span><br><span class="line">                     useArr.push(randomArr[i]);</span><br><span class="line">                  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                          <span class="keyword">continue</span>;</span><br><span class="line">                          &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">             &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">var</span> totalData = [];</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; len; j++) &#123;</span><br><span class="line">         <span class="keyword">var</span> msgData = [];</span><br><span class="line">         msgData.push(sourceData[j]);</span><br><span class="line">         msgData.unshift(arr[j], dataHandle.randomNum(<span class="number">1</span>, <span class="number">0</span>, <span class="number">40</span>)[<span class="number">0</span>],  dataHandle.randomNum(<span class="number">1</span>, <span class="number">20</span>, <span class="number">50</span>)[<span class="number">0</span>]);</span><br><span class="line">          totalData.push(msgData)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> totalData;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="comment">//生成一个假点，以便echarts散点图能够有一个确定的阈值。</span></span><br><span class="line"> <span class="keyword">var</span> maxRangePoint = [[<span class="number">60</span>, <span class="number">40</span>, <span class="number">30</span>, &#123;<span class="attr">ip</span>: <span class="string">"192.168.10.36"</span>, <span class="attr">status</span>: <span class="string">"ok"</span>&#125;]];</span><br><span class="line">                            </span><br><span class="line"> infoOption.series[<span class="number">0</span>].data = scatterDataInit(json.data.normal);</span><br><span class="line"> infoOption.series[<span class="number">1</span>].data = scatterDataInit(json.data.low);</span><br><span class="line"> infoOption.series[<span class="number">2</span>].data = scatterDataInit(json.data.middle);</span><br><span class="line"> infoOption.series[<span class="number">3</span>].data = scatterDataInit(json.data.high);</span><br><span class="line"> infoOption.series[<span class="number">4</span>].data = maxRangePoint;</span><br><span class="line"> <span class="comment">// 使用刚指定的配置项和数据显示图表。</span></span><br><span class="line"> radaChart.setOption(radarOption);</span><br><span class="line"> infoChart.setOption(infoOption);</span><br><span class="line">&#125;</span><br><span class="line">initInfoChart();</span><br></pre></td></tr></table></figure></p>
 <p>以上就是全部代码了，主要就是处理随机数据的生成，和将随机数据动态分配给后台数据，并组装成echarts散点图可执行的数据格式。如果有疑问，欢迎在底下留言。</p>
 
       
     </div>
-    <footer class="article-footer">
-      <a data-url="https://wawisready.github.io/2018/03/14/魔改echarts生成类环形散点图，附带随机数据的组装/" data-id="cjtvibbcn000iuovdv5l1pvqg" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Echarts/">Echarts</a></li></ul>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Echarts/" rel="tag"># Echarts</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/11/从JavaScript的垃圾回收机制谈起/" rel="next" title="从 JavaScript 的垃圾回收机制谈起">
+                <i class="fa fa-chevron-left"></i> 从 JavaScript 的垃圾回收机制谈起
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/17/D3.js实现带动画效果的柱状图/" rel="prev" title="D3.js 实现带动画效果的柱状图">
+                D3.js 实现带动画效果的柱状图 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
     </footer>
   </div>
   
-    
-<nav id="article-nav">
   
-    <a href="/2018/03/17/D3.js实现带动画效果的柱状图/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
         
-          D3.js 实现带动画效果的柱状图
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Eiwen</p>
+              <p class="site-description motion-element" itemprop="description">web前端</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
         
       </div>
-    </a>
-  
-  
-    <a href="/2018/03/11/从JavaScript的垃圾回收机制谈起/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">从 JavaScript 的垃圾回收机制谈起</div>
-    </a>
-  
-</nav>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Eiwen</span>
 
   
-</article>
+</div>
 
-</section>
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
         
-          <aside id="sidebar">
-  
-    
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/D3-js/">D3.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Echarts/">Echarts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端自动化/">前端自动化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/框架/">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试题/">面试题</a></li></ul>
-    </div>
-  </div>
 
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/D3-js/" style="font-size: 16.67px;">D3.js</a> <a href="/tags/Echarts/" style="font-size: 10px;">Echarts</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/前端自动化/" style="font-size: 13.33px;">前端自动化</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/面试题/" style="font-size: 10px;">面试题</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li></ul>
-    </div>
-  </div>
 
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2019/03/30/从-Promise-来看-JavaScript-的异步处理/">从 Promise 来看 JavaScript 的异步处理</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/26/UI recorder 自动化UI测试框架使用手册/">UI recorder 自动化UI测试框架使用手册</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/20/原生JS实现并封装前端路由/">原生 JavaScript 实现并封装前端路由</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/19/Karma 自动化测试框架搭建文档/">Karma 自动化测试框架搭建文档</a>
-          </li>
-        
-          <li>
-            <a href="/2018/04/06/JavaScript事件委托机制与this的比较/">JavaScript事件委托机制与this的比较</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
 
-  
-</aside>
+
+
         
       </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2019 Eiwen<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
     
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/js/script.js"></script>
+    
 
   </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
 </body>
 </html>
