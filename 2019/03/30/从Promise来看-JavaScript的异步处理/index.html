@@ -3,21 +3,22 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>Eiwen的前端小站</title>
+  <title>从 Promise 来看 JavaScript 的异步处理 | Eiwen的前端小站</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="一.前言在早期 JavaScript 的 ES5 语法中，多层函数的回调嵌套是一件让人很头疼的事儿，行内黑话一般称之为回调地狱 。 可能有些伙计还没遇到过此类业务场景，但是没关系，只要在前端圈里混，苍天会绕过谁呢？所以为了大家，我就举个特别常见的业务场景：  有三个接口，分别为 URL-A, URL-B, URL-C (都是 get 请求)，我们需要分别向这三个接口请求获取数据。 请求 URL-B">
+<meta name="keywords" content="JavaScript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Eiwen的前端小站">
-<meta property="og:url" content="https://wawisready.github.io/2019/03/30/Promise/index.html">
+<meta property="og:title" content="从 Promise 来看 JavaScript 的异步处理">
+<meta property="og:url" content="https://wawisready.github.io/2019/03/30/从Promise来看-JavaScript的异步处理/index.html">
 <meta property="og:site_name" content="Eiwen的前端小站">
 <meta property="og:description" content="一.前言在早期 JavaScript 的 ES5 语法中，多层函数的回调嵌套是一件让人很头疼的事儿，行内黑话一般称之为回调地狱 。 可能有些伙计还没遇到过此类业务场景，但是没关系，只要在前端圈里混，苍天会绕过谁呢？所以为了大家，我就举个特别常见的业务场景：  有三个接口，分别为 URL-A, URL-B, URL-C (都是 get 请求)，我们需要分别向这三个接口请求获取数据。 请求 URL-B">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/2019031911564922.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190319120005653.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190319120014205.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-03-30T12:37:58.949Z">
+<meta property="og:updated_time" content="2019-03-30T12:52:00.728Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Eiwen的前端小站">
+<meta name="twitter:title" content="从 Promise 来看 JavaScript 的异步处理">
 <meta name="twitter:description" content="一.前言在早期 JavaScript 的 ES5 语法中，多层函数的回调嵌套是一件让人很头疼的事儿，行内黑话一般称之为回调地狱 。 可能有些伙计还没遇到过此类业务场景，但是没关系，只要在前端圈里混，苍天会绕过谁呢？所以为了大家，我就举个特别常见的业务场景：  有三个接口，分别为 URL-A, URL-B, URL-C (都是 get 请求)，我们需要分别向这三个接口请求获取数据。 请求 URL-B">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/2019031911564922.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70">
   
@@ -68,15 +69,25 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Promise" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-从Promise来看-JavaScript的异步处理" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/03/30/Promise/" class="article-date">
-  <time datetime="2019-03-30T12:38:25.566Z" itemprop="datePublished">2019-03-30</time>
+    <a href="/2019/03/30/从Promise来看-JavaScript的异步处理/" class="article-date">
+  <time datetime="2019-03-30T12:51:14.000Z" itemprop="datePublished">2019-03-30</time>
 </a>
     
   </div>
   <div class="article-inner">
     
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      从 Promise 来看 JavaScript 的异步处理
+    </h1>
+  
+
+      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
@@ -189,9 +200,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wawisready.github.io/2019/03/30/Promise/" data-id="cjtvht9lk0000gwvdswixhvl1" class="article-share-link">Share</a>
+      <a data-url="https://wawisready.github.io/2019/03/30/从Promise来看-JavaScript的异步处理/" data-id="cjtvhxj5g00009kvdviwxatod" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
     </footer>
   </div>
   
@@ -207,9 +220,23 @@
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
@@ -228,7 +255,7 @@
       <ul>
         
           <li>
-            <a href="/2019/03/30/Promise/">(no title)</a>
+            <a href="/2019/03/30/从Promise来看-JavaScript的异步处理/">从 Promise 来看 JavaScript 的异步处理</a>
           </li>
         
       </ul>
