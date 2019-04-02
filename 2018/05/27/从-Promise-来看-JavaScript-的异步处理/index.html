@@ -90,7 +90,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/2019031911564922.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190319120005653.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190319120014205.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RrMjI5MA==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-03-31T01:46:09.163Z">
+<meta property="og:updated_time" content="2019-04-02T11:37:51.802Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="从 Promise 来看 JavaScript 的异步处理">
 <meta name="twitter:description" content="一.前言在早期 JavaScript 的 ES5 语法中，多层函数的回调嵌套是一件让人很头疼的事儿，行内黑话一般称之为回调地狱 。">
@@ -407,7 +407,7 @@
 <p>我们先分析一下题目，看到这个题目是不是就有一种很熟悉的感觉？像不像我们在上面改写的<strong>异步并行</strong>？</p>
 <p>你的感觉没错，实际上这道题考查的就是让你手写一个简单的 <code>Promise.all()</code> 函数。</p>
 <p>所以，我们就能知道，上题中 <code>ajaxArray</code> 参数实际上就是一个包含多个 <code>Promise</code> 对象的数组，我们可以用并行遍历的方式来处理它。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> mergePromise = <span class="function"><span class="params">ajaxArray</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> seq = <span class="built_in">Promise</span>.resolve();</span><br><span class="line">    <span class="keyword">let</span> data = [];</span><br><span class="line">    ajaxArray.map(<span class="function"><span class="params">func</span> =&gt;</span> &#123;</span><br><span class="line">        seq = seq.then(func).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">            data.push(res);</span><br><span class="line">            <span class="keyword">return</span> data;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> seq;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<h2 id="六-小结"><a href="#六-小结" class="headerlink" title="六.小结"></a>六.小结</h2><p>如果你看到这了这，那么恭喜你，不管你有没有吸收其中的内容，你至少你知道了整个 <code>Promise</code> 应该怎么去学。实际上在工作中 <code>Promise</code> 的应用是很多的，包括我们使用的 <code>babel</code> 中也会有 <code>Promise-polyfill</code>。现在已经是 <code>9102</code> 年了，前端圈已经逐渐稳定下来，这意味着你我的时间已然不多，所以加油吧，伙计们。</p>
+<h2 id="六-小结"><a href="#六-小结" class="headerlink" title="六.小结"></a>六.小结</h2><p>如果你看到这了这，那么恭喜你，不管你有没有吸收其中的内容，你至少你知道了整个 <code>Promise</code> 应该怎么去学。实际上在工作中 <code>Promise</code> 的应用是很多的，包括我们使用的 <code>babel</code> 中也会有 <code>Promise-polyfill</code>。现在已经是 <code>8102</code> 年了，前端圈已经逐渐稳定下来，这意味着你我的时间已然不多，所以加油吧，伙计们。</p>
 
       
     </div>
